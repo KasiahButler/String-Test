@@ -68,7 +68,6 @@ int main()
 	return 0;
 }
 
-
 void TEST_ALL_STRING_STUFF()
 {
 #ifndef _DEBUG

@@ -9,7 +9,7 @@
 sfw::string::string(void)
 {
 	// TODO: is this finished?
-	m_data = new char[m_size = 1]{ '\0' };
+	m_data = new  char[m_size = 1]{ '\0' };
 }
 
 sfw::string::~string()
@@ -31,16 +31,29 @@ size_t sfw::string::length() const
 sfw::string::string(size_t size)
 {
 	// TODO:
+	m_data = new char[m_size = size + 1];
+	m_data[m_size - 1] = '\0';
 }
 
 sfw::string::string(const char * a, size_t size)
 {
 	// TODO:
+	m_data = new char[m_size = size];
+	strncpy_s(m_data,m_size - 1, a, m_size);
+	m_data[m_size] = '/0';
 }
 
 sfw::string::string(const char * a)
 {
-	// TODO:
+	if (a != nullptr)	// then a is valid, let's do some copying
+	{
+		m_data = new char[m_size = strlen(a) + 1];	// +1 for null-term character '\0'
+		strcpy_s(m_data, m_size, a);
+	}
+	else  // a is null, let's just make this an empty string
+	{
+		m_data = new  char[m_size = 1]{ '\0' };
+	}
 }
 
 sfw::string::string(const string & a)
@@ -107,12 +120,19 @@ const char & sfw::string::operator[](size_t index) const
 size_t sfw::string::size() const
 {
 	// TODO:
-	return size_t();
+
+	return size_t(m_size - 1);
 }
 
+//resize m_data
 void sfw::string::resize(size_t size)
 {
-	// TODO:
+	if (size < 1) { size = 1; }
+	char *h = new char[size];
+	strcpy_s(h, size, m_data);
+	delete[] m_data;
+	m_data = h;
+	m_data[size - 1] = '/0';
 }
 
 void sfw::string::clear()
