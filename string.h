@@ -138,6 +138,8 @@ namespace sfw
 	bool operator>=(const string &a, const char *b);
 	bool operator>=(const char *a, const string &b);
 
+
+	// check for same or not same entry?
 	bool operator!=(const string &a, const string &b);
 	bool operator!=(const string &a, const char *b);
 	bool operator!=(const char *a, const string &b);

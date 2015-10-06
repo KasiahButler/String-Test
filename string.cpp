@@ -8,19 +8,16 @@
 // These may need to be modified!
 sfw::string::string(void)
 {
-	// TODO: is this finished?
 	m_data = new  char[m_size = 1]{ '\0' };
 }
 
 sfw::string::~string()
 {
-	// TODO: is this finished?
-	delete[]m_data;
+	delete[] m_data;
 }
 
 size_t sfw::string::length() const
 {
-	// TODO: is this finished?
 	return strlen(m_data);
 }
 
@@ -30,27 +27,24 @@ size_t sfw::string::length() const
 
 sfw::string::string(size_t size)
 {
-	// TODO:
 	m_data = new char[m_size = size + 1];
 	m_data[m_size - 1] = '\0';
 }
 
 sfw::string::string(const char * a, size_t size)
 {
-	// TODO:
 	m_data = new char[m_size = size];
-	strncpy_s(m_data,m_size - 1, a, m_size);
-	m_data[m_size] = '/0';
+	strncpy_s(m_data,m_size, a, size - 1);
 }
 
 sfw::string::string(const char * a)
 {
-	if (a != nullptr)	// then a is valid, let's do some copying
+	if (a != nullptr)
 	{
-		m_data = new char[m_size = strlen(a) + 1];	// +1 for null-term character '\0'
+		m_data = new char[m_size = strlen(a) + 1];
 		strcpy_s(m_data, m_size, a);
 	}
-	else  // a is null, let's just make this an empty string
+	else
 	{
 		m_data = new  char[m_size = 1]{ '\0' };
 	}
@@ -58,12 +52,25 @@ sfw::string::string(const char * a)
 
 sfw::string::string(const string & a)
 {
-	// TODO:
+	m_size = a.m_size;
+	m_data = new char[m_size];
+	strncpy_s(m_data, m_size, a.m_data, a.m_size - 1);
 }
 
+// move assignment
 sfw::string::string(string && a)
 {
 	// TODO:
+	if (m_data != nullptr)
+	{
+		delete[]m_data;
+	}
+	m_size = a.m_size;
+	m_data = a.m_data;
+
+	a.m_size = 1;
+	a.m_data = new char[a.m_size];
+	a.m_data[0] = '\0';
 }
 
 sfw::string & sfw::string::operator=(const string & a)
@@ -124,7 +131,6 @@ size_t sfw::string::size() const
 	return size_t(m_size - 1);
 }
 
-//resize m_data
 void sfw::string::resize(size_t size)
 {
 	if (size < 1) { size = 1; }
@@ -163,7 +169,9 @@ bool sfw::operator<(const string & a, const char * b)
 	// TODO:
 	return false;
 }
-
+			// myString < "Dinosaur"
+			// "Dinosaur" < myString
+			// myString < otherString
 bool sfw::operator<(const char * a, const string & b)
 {
 	// TODO:
@@ -305,5 +313,5 @@ std::istream & sfw::operator>>(std::istream & is, string & p)
 const sfw::string sfw::literals::operator""_sfw(const char * a, size_t len)
 {
 	// TODO:
-	return string();
+	return string(a, len + 1);
 }
