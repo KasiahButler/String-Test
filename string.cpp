@@ -75,13 +75,17 @@ sfw::string::string(string && a)
 
 sfw::string & sfw::string::operator=(const string & a)
 {
-	// TODO:
-	return *this;
+	if (this != &a)
+	{
+		char *h = new char[a.m_size];
+		strcpy_s(h, a.m_size, a.cstring);
+	}
+		return *this;
 }
 
 sfw::string & sfw::string::operator=(string && a)
 {
-	// TODO:
+	
 	return *this;
 }
 
@@ -143,134 +147,131 @@ void sfw::string::resize(size_t size)
 
 void sfw::string::clear()
 {
-	// TODO:
+	m_data[0] = '/0';
 }
 
 bool sfw::string::empty() const
 {
-	// TODO:
-	return false;
+	if (m_data[0] = '/0') return true;
+	else return false;
 }
 
 const char * sfw::string::cstring() const
 {
-	// TODO:
-	return nullptr;
+	return m_data;
 }
 
 bool sfw::operator<(const string & a, const string & b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a.cstring, b.cstring) < 0) return true;
+	else return false;
 }
 
 bool sfw::operator<(const string & a, const char * b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a.cstring, b) < 0) return true;
+	else return false;
 }
-			// myString < "Dinosaur"
-			// "Dinosaur" < myString
-			// myString < otherString
+
 bool sfw::operator<(const char * a, const string & b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a, b.cstring) < 0) return true;
+	else return false;
 }
 
 bool sfw::operator<=(const string & a, const string & b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a.cstring, b.cstring) <= 0) return true;
+	else return false;
 }
 
 bool sfw::operator<=(const string & a, const char * b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a.cstring, b) <= 0) return true;
+	else return false;
 }
 
 bool sfw::operator<=(const char * a, const string & b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a, b.cstring) <= 0) return true;
+	else return false;
 }
 
 bool sfw::operator>(const string & a, const string & b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a.cstring, b.cstring) > 0) return true;
+	else return false;
 }
 
 bool sfw::operator>(const string & a, const char * b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a.cstring, b) > 0) return true;
+	else return false;
 }
 
 bool sfw::operator>(const char * a, const string & b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a, b.cstring) > 0) return true;
+	else return false;
 }
 
 bool sfw::operator>=(const string & a, const string & b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a.cstring, b.cstring) >= 0) return true;
+	else return false;
 }
 
 bool sfw::operator>=(const string & a, const char * b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a.cstring, b) >= 0) return true;
+	else return false;
 }
 
 bool sfw::operator>=(const char * a, const string & b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a, b.cstring) >= 0) return true;
+	else return false;
 }
 
 bool sfw::operator!=(const string & a, const string & b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a.cstring, b.cstring) != 0) return true;
+	else return false;
 }
 
 bool sfw::operator!=(const string & a, const char * b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a.cstring, b) != 0) return true;
+	else return false;
 }
 
 bool sfw::operator!=(const char * a, const string & b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a, b.cstring) != 0) return true;
+	else return false;
 }
 
 bool sfw::operator==(const string & a, const string & b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a.cstring, b.cstring) == 0) return true;
+	else return false;
 }
 
 bool sfw::operator==(const string & a, const char * b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a.cstring, b) == 0) return true;
+	else return false;
 }
 
 bool sfw::operator==(const char * a, const string & b)
 {
-	// TODO:
-	return false;
+	if (strcmp(a, b.cstring) == 0) return true;
+	else return false;
 }
 
 sfw::string sfw::operator+(const string & a, const string & b)
 {
-	// TODO:
+	
 	return string();
 }
 
